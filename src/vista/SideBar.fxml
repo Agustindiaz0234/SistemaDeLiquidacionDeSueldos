@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="controlador.SideBarController">
+   <children>
+           <VBox layoutX="0" layoutY="0" prefWidth="150" prefHeight="400.0" style="-fx-background-color: #333;">
+         <children>
+            <Button fx:id="btnEmpresa" mnemonicParsing="false" onAction="#navegarEmpresa" text="Empresa" />
+            <Button fx:id="btnMenu" mnemonicParsing="false" onAction="#navegarMenu" text="Menu" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
