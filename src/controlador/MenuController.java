@@ -35,7 +35,7 @@ public class MenuController implements Initializable {
     private void click(ActionEvent event) {
         
         Stage stage = (Stage) btnEmpresa.getScene().getWindow();
-        Navegacion.Navegar("/vista/Empresa.fxml", stage);
+
         
         
     }

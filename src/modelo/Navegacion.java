@@ -16,21 +16,19 @@ import javafx.stage.Stage;
  */
 public class Navegacion {
     
+    private static final String BASE_PATH ="/vista/";
     
     
-    public static void Navegar(String fxml, Stage stage){
+    public static Pane Navegar(String fxml){
     
         try{
-        FXMLLoader loader = new FXMLLoader(Navegacion.class.getResource(fxml));
+        FXMLLoader loader = new FXMLLoader(Navegacion.class.getResource(BASE_PATH + fxml));
         Pane nuevaVentana = (Pane) loader.load();
-        Scene nuevaEscena = new Scene(nuevaVentana);
-        stage.setScene(nuevaEscena);
-        stage.show();
-        
-        
+        return nuevaVentana;
         }catch(IOException e){
             System.out.print(e.getMessage());
         }
+        return null;
     
     }
     

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="110.0" stylesheets="@../css/sideBar.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.SideBarController">
+   <children>
+      <ToggleButton fx:id="btnMenu" mnemonicParsing="false" onAction="#NavegarMenu" prefHeight="45.0" prefWidth="123.0" text="Menu">
+         <toggleGroup>
+            <ToggleGroup fx:id="navGroup" />
+         </toggleGroup>
+      </ToggleButton>
+      <ToggleButton fx:id="btnEmpresa" mnemonicParsing="false" onAction="#navegarEmpresa" prefHeight="44.0" prefWidth="129.0" text="Empresa" toggleGroup="$navGroup" />
+   </children>
+</VBox>

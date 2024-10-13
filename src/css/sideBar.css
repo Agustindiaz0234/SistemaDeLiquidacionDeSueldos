@@ -1,0 +1,23 @@
+/* Estilo normal del botón */
+.toggle-button {
+    -fx-background-color: lightgray;
+    -fx-text-fill: black;
+    -fx-padding: 10px;
+    -fx-border-color: gray;
+}
+
+/* Cuando el botón está presionado (clic mientras mantienes el mouse) */
+.toggle-button:pressed {
+    -fx-background-color: darkgray;
+}
+
+/* Cuando el botón está seleccionado (clic y queda seleccionado) */
+.toggle-button:selected {
+    -fx-background-color: #505050;
+    -fx-text-fill: white;
+}
+
+/* Cuando el mouse está sobre el botón */
+.toggle-button:hover {
+    -fx-background-color: #c0c0c0;
+}

@@ -10,6 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import modelo.Navegacion;
 
@@ -18,11 +20,14 @@ import modelo.Navegacion;
  *
  * @author diaza
  */
-public class EmpresaController implements Initializable {
+public class SideBarController implements Initializable {
 
-    private Button btnMenu;
     @FXML
-    private Button btnAgregar;
+    private ToggleButton btnMenu;
+    @FXML
+    private ToggleGroup navGroup;
+    @FXML
+    private ToggleButton btnEmpresa;
 
     /**
      * Initializes the controller class.
@@ -32,13 +37,20 @@ public class EmpresaController implements Initializable {
         // TODO
     }    
 
-    private void volverMenu(ActionEvent event) {
-        Stage stage = (Stage) btnMenu.getScene().getWindow();
-       
-    }
+   
 
     @FXML
-    private void navegarAgregarEmpresa(ActionEvent event) {
+    private void NavegarMenu(ActionEvent event) {
+        
+        Main.showContent("Menu.fxml");
+        
+    }
+
+
+
+    @FXML
+    private void navegarEmpresa(ActionEvent event) {
+    Main.showContent("Empresa.fxml");
     }
     
 }

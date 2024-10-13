@@ -6,23 +6,14 @@ package controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
-import modelo.Navegacion;
 
 /**
  * FXML Controller class
  *
  * @author diaza
  */
-public class EmpresaController implements Initializable {
-
-    private Button btnMenu;
-    @FXML
-    private Button btnAgregar;
+public class RegistrarEmpresaController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -31,14 +22,5 @@ public class EmpresaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    private void volverMenu(ActionEvent event) {
-        Stage stage = (Stage) btnMenu.getScene().getWindow();
-       
-    }
-
-    @FXML
-    private void navegarAgregarEmpresa(ActionEvent event) {
-    }
     
 }
