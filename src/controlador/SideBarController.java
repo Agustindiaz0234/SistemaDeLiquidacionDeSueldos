@@ -42,7 +42,7 @@ public class SideBarController implements Initializable {
     @FXML
     private void NavegarMenu(ActionEvent event) {
         
-        Main.showContent("Menu.fxml");
+        Navegacion.showContent("Menu.fxml");
         
     }
 
@@ -50,7 +50,9 @@ public class SideBarController implements Initializable {
 
     @FXML
     private void navegarEmpresa(ActionEvent event) {
-    Main.showContent("Empresa.fxml");
+ 
+        Navegacion.showContent("Empresa.fxml");
+        
     }
     
 }
