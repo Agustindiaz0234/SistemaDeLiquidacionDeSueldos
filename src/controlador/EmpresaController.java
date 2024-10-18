@@ -27,7 +27,6 @@ import modelo.Navegacion;
  */
 public class EmpresaController implements Initializable {
 
-    private Button btnMenu;
     @FXML
     private Button btnAgregar;
     @FXML
@@ -39,21 +38,19 @@ public class EmpresaController implements Initializable {
     @FXML
     private TableView<Empresa> tblEmpresas;
     
-    private ObservableList<Empresa> empresas; 
+    private static ObservableList<Empresa> empresas = FXCollections.observableArrayList();; 
     @FXML
     private TableColumn<Empresa, Void> columBoton;
+    @FXML
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        empresas = FXCollections.observableArrayList();
-        
+    
         this.columNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         this.columDireccion.setCellValueFactory(new PropertyValueFactory("direccion"));
         this.columnTelefono.setCellValueFactory(new PropertyValueFactory("telefono"));
         
-        // Configurar la columna de botones
     columBoton.setCellFactory(param -> new TableCell<Empresa, Void>() {
 
         private final Button btn = new Button("Seleccionar");
@@ -73,37 +70,24 @@ public class EmpresaController implements Initializable {
             }
         }
     });
-
-       
-        Empresa e = new Empresa(1,"Aguscorp","Parana344", 345448566);
-        Empresa e1 = new Empresa(2,"5competencia","mitre444", 345466554);
-        Empresa e2 = new Empresa(3,"Autoservicio santa rosa","Parana924", 345454321);
-        
-        this.empresas.add(e);
-        this.empresas.add(e1);
-        this.empresas.add(e2);
         this.tblEmpresas.setItems(empresas);
     }    
 
 
     @FXML
     private void navegarAgregarEmpresa(ActionEvent event) {
-        
-
-        Empresa e4 = new Empresa(4,"Holamundo", "Messi", 34544566);
-        
-        this.empresas.add(e4);
-        this.tblEmpresas.setItems(empresas);
-        
-       
-//Stage stage = (Stage) btnAgregar.getScene().getWindow();
-          //Navegacion.Navegar("RegistrarEmpresa.fxml", stage);
+          
+          Stage stage = (Stage) btnAgregar.getScene().getWindow();
+          Navegacion.Navegar("agregarEmpresa.fxml", stage);
     }
     
+     public static void agregarEmpresas(Empresa e) {
+      EmpresaController.empresas.add(e);
+    }
     
     private void handleButton(Empresa empresa){
-    
-        System.out.println("Boton presionado para la empresa " + empresa.getId());
+     System.out.println("Boton presionado para la empresa " + empresa.getId());
     }
+
     
 }
