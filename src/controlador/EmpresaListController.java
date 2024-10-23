@@ -1,10 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package controlador;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,13 +19,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import modelo.Empresa;
 import modelo.Navegacion;
+import repository.EmpresaRepository;
 
-/**
- * FXML Controller class
- *
- * @author diaza
- */
-public class EmpresaController implements Initializable {
+public class EmpresaListController implements Initializable {
 
     @FXML
     private Button btnAgregar;
@@ -38,12 +34,22 @@ public class EmpresaController implements Initializable {
     @FXML
     private TableView<Empresa> tblEmpresas;
     
-    private static ObservableList<Empresa> empresas = FXCollections.observableArrayList();; 
+    private static ObservableList<Empresa> empresas = FXCollections.observableArrayList(); 
     @FXML
     private TableColumn<Empresa, Void> columBoton;
+    
+    
+    private EmpresaRepository empresaRepository;
     @FXML
+    private Button btnEditar;
+    @FXML
+    private Button btnEliminar;
 
-
+    public EmpresaListController() {
+        // Inicializamos el repositorio en el constructor
+        this.empresaRepository = new EmpresaRepository();
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     
@@ -51,9 +57,11 @@ public class EmpresaController implements Initializable {
         this.columDireccion.setCellValueFactory(new PropertyValueFactory("direccion"));
         this.columnTelefono.setCellValueFactory(new PropertyValueFactory("telefono"));
         
+        
     columBoton.setCellFactory(param -> new TableCell<Empresa, Void>() {
 
-        private final Button btn = new Button("Seleccionar");
+
+   private final Button btn = new Button("Seleccionar");
 
         @Override
         protected void updateItem(Void item, boolean empty) {
@@ -70,23 +78,55 @@ public class EmpresaController implements Initializable {
             }
         }
     });
-        this.tblEmpresas.setItems(empresas);
+        cargarDatosDesdeBD();
     }    
+    
+      private void cargarDatosDesdeBD() {
+            
+            Empresa[] empresas = empresaRepository.getAll();
+            tblEmpresas.setItems(FXCollections.observableArrayList(empresas));
+        
+    }
 
 
     @FXML
     private void navegarAgregarEmpresa(ActionEvent event) {
           
           Stage stage = (Stage) btnAgregar.getScene().getWindow();
-          Navegacion.Navegar("agregarEmpresa.fxml", stage);
+          Navegacion.Navegar("EmpresaDetail.fxml", stage);
     }
     
-     public static void agregarEmpresas(Empresa e) {
-      EmpresaController.empresas.add(e);
-    }
-    
+
     private void handleButton(Empresa empresa){
-     System.out.println("Boton presionado para la empresa " + empresa.getId());
+
+     ListarEmpleadoController.setEmpresa(empresa);
+   
+     Stage stage = (Stage) tblEmpresas.getScene().getWindow();
+     
+     Navegacion.cargarVistaPrincipalConContenido("ListarEmpleado.fxml", stage);  
+    }
+
+   
+    @FXML
+    private void navegarEditarEmpresa(ActionEvent event) {
+        
+         Empresa selectedEmpresa = tblEmpresas.getSelectionModel().getSelectedItem();
+         
+         EmpresaDetailController.setEditMode(selectedEmpresa);
+         
+          Stage stage = (Stage) btnEditar.getScene().getWindow();
+          Navegacion.Navegar("EmpresaDetail.fxml", stage);
+        
+    }
+
+    @FXML
+    private void navegarEliminarEmpresa(ActionEvent event) {
+        
+        Empresa selectedEmpresa = tblEmpresas.getSelectionModel().getSelectedItem();
+        
+        EmpresaRepository er = new EmpresaRepository();
+        
+        er.delete(selectedEmpresa.getId());
     }
 
     

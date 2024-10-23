@@ -51,7 +51,7 @@ public class SideBarController implements Initializable {
     @FXML
     private void navegarEmpresa(ActionEvent event) {
  
-        Navegacion.showContent("Empresa.fxml");
+        Navegacion.showContent("EmpresaList.fxml");
         
     }
     
