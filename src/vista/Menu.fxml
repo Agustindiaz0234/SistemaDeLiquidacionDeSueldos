@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22"  fx:controller="controlador.MenuController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.MenuController">
    <children>
-      <Button fx:id="btnEmpresa" layoutX="270.0" layoutY="175.0" mnemonicParsing="false" onAction="#click" text="Empresa" />
-      <BorderPane prefHeight="200.0" prefWidth="200.0" >
-      </BorderPane>
+      <Label text="Sistema de liquidacion de sueldos">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label text="Estudio Diaz">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      
+      <!-- HBox para centrar los botones -->
+      <HBox alignment="CENTER" spacing="10.0">
+         <Button fx:id="btnEmpresas" mnemonicParsing="false" onAction="#navegarEmpresa" text="Empresas" />
+         <Button fx:id="btnAdministrar" mnemonicParsing="false" onAction="#navegarAdministrar" text="Administrar" />
+      </HBox>
+      
+      <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#closeVentana" text="Salir" />
    </children>
-</AnchorPane>
+</VBox>

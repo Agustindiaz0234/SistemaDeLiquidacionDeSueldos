@@ -2,18 +2,22 @@
 package modelo;
 
 
-public class Empleados {
+public class Empleado {
     
+    int id;
     String nombre;
     String apellido;
     int telefono;
     String mail;
+    int empresaId;
 
-    public Empleados(String nombre, String apellido, int telefono, String mail) {
+    public Empleado(int id, String nombre, String apellido, int telefono, String mail, int empresaId) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.mail = mail;
+        this.empresaId = empresaId;
     }
 
     public String getNombre() {
@@ -48,6 +52,20 @@ public class Empleados {
         this.mail = mail;
     }
     
+       public int getId() {
+        return id;
+    }
     
+       public void setId(int id) {
+        this.id = id;
+    }
+       
+         public int getEmpresaId() {
+        return empresaId;
+    }
+    
+       public void setEmpresaId(int empresaId) {
+        this.empresaId = empresaId;
+    }
     
 }

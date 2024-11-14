@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import modelo.Empleados;
+import modelo.Empleado;
 import modelo.Empresa;
 
 public class ListarEmpleadoController implements Initializable {
@@ -19,7 +19,7 @@ public class ListarEmpleadoController implements Initializable {
     private Label lblNombreEmpresa;
     
     @FXML
-    private TableView<Empleados> tblEmpleados;
+    private TableView<Empleado> tblEmpleados;
     @FXML
     private TableColumn colNombre;
     @FXML
@@ -31,7 +31,7 @@ public class ListarEmpleadoController implements Initializable {
     
     private static Empresa empresa;
     
-   public static ObservableList<Empleados> listaEmpleados = FXCollections.observableArrayList();
+   public static ObservableList<Empleado> listaEmpleados = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

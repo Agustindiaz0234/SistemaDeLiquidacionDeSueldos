@@ -1,24 +1,19 @@
 package controlador;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import modelo.Empresa;
-import modelo.Navegacion;
 import repository.EmpresaRepository;
 
 public class EmpresaListController implements Initializable {
@@ -46,7 +41,6 @@ public class EmpresaListController implements Initializable {
     private Button btnEliminar;
 
     public EmpresaListController() {
-        // Inicializamos el repositorio en el constructor
         this.empresaRepository = new EmpresaRepository();
     }
     
@@ -83,7 +77,7 @@ public class EmpresaListController implements Initializable {
     
       private void cargarDatosDesdeBD() {
             
-            Empresa[] empresas = empresaRepository.getAll();
+            Empresa[] empresas = empresaRepository.getAll(null);
             tblEmpresas.setItems(FXCollections.observableArrayList(empresas));
         
     }
@@ -92,18 +86,15 @@ public class EmpresaListController implements Initializable {
     @FXML
     private void navegarAgregarEmpresa(ActionEvent event) {
           
-          Stage stage = (Stage) btnAgregar.getScene().getWindow();
-          Navegacion.Navegar("EmpresaDetail.fxml", stage);
+        MainLayoutController mainController = Main.getMainController();
+        EmpresaDetailController.setFalse();
+        mainController.showAgregarEmpresa();
     }
     
 
     private void handleButton(Empresa empresa){
-
-     ListarEmpleadoController.setEmpresa(empresa);
-   
-     Stage stage = (Stage) tblEmpresas.getScene().getWindow();
-     
-     Navegacion.cargarVistaPrincipalConContenido("ListarEmpleado.fxml", stage);  
+        MainLayoutController mainController = Main.getMainController(); // Método para obtener la instancia del controlador principal
+        mainController.showEmpleadoList(empresa); //
     }
 
    
@@ -111,12 +102,18 @@ public class EmpresaListController implements Initializable {
     private void navegarEditarEmpresa(ActionEvent event) {
         
          Empresa selectedEmpresa = tblEmpresas.getSelectionModel().getSelectedItem();
-         
-         EmpresaDetailController.setEditMode(selectedEmpresa);
-         
-          Stage stage = (Stage) btnEditar.getScene().getWindow();
-          Navegacion.Navegar("EmpresaDetail.fxml", stage);
-        
+      
+         if(selectedEmpresa == null){
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+               alert.setTitle("Advertencia");
+               alert.setHeaderText(null);
+               alert.setContentText("No se seleccionó ningúna empresa");
+               alert.showAndWait();
+         }else{
+                EmpresaDetailController.setEditMode(selectedEmpresa);
+                MainLayoutController mainLayout = Main.getMainController();
+                mainLayout.showAgregarEmpresa();
+         }
     }
 
     @FXML
@@ -124,9 +121,17 @@ public class EmpresaListController implements Initializable {
         
         Empresa selectedEmpresa = tblEmpresas.getSelectionModel().getSelectedItem();
         
-        EmpresaRepository er = new EmpresaRepository();
-        
-        er.delete(selectedEmpresa.getId());
+          if(selectedEmpresa == null){
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+               alert.setTitle("Advertencia");
+               alert.setHeaderText(null);
+               alert.setContentText("No se seleccionó ningúna empresa");
+               alert.showAndWait();
+          }else{
+                  EmpresaRepository er = new EmpresaRepository();
+                  er.delete(selectedEmpresa.getId());
+                 cargarDatosDesdeBD();
+          }
     }
 
     

@@ -1,29 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package controlador;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import modelo.Empresa;
-import modelo.Navegacion;
 import repository.EmpresaRepository;
 
-/**
- * FXML Controller class
- *
- * @author diaza
- */
+
 public class EmpresaDetailController implements Initializable {
 
     @FXML
@@ -46,7 +33,6 @@ public class EmpresaDetailController implements Initializable {
    private EmpresaRepository empresaRepository;
 
     public EmpresaDetailController() {
-        // Inicializamos el repositorio en el constructor
         this.empresaRepository = new EmpresaRepository();
     }
 
@@ -81,9 +67,8 @@ public class EmpresaDetailController implements Initializable {
             insertarEmpresa(empresa);
         
         }
-        
-      Stage stage = (Stage) btnGuardar.getScene().getWindow();
-      Navegacion.cargarVistaPrincipalConContenido("EmpresaList.fxml", stage);
+            MainLayoutController mainLayout = Main.getMainController();
+            mainLayout.showEmpresa();
     }
     
     
@@ -105,6 +90,10 @@ public class EmpresaDetailController implements Initializable {
             
             empresa =  emp;
             
+        }
+        
+        public static void setFalse(){
+        isEdit = false;
         }
     
 }
