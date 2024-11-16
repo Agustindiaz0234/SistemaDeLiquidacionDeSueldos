@@ -54,6 +54,20 @@ public class MainLayoutController implements Initializable {
         loadForm("EmpleadoDetail.fxml");
      }
 
+     public void showUsuarioList(){
+     loadForm("UsuarioList.fxml");
+     }
+     
+     public void showUsuarioDetail(){
+     loadForm("UsuarioDetail.fxml");
+     }
+     
+     public void showRolList(){
+     loadForm("RolList.fxml");
+     }
+     public void showRolDetail(){
+     loadForm("RolDetail.fxml");
+     }
      
      
     private void loadForm(String fxmlFile) {

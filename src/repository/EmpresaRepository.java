@@ -29,6 +29,8 @@ public class EmpresaRepository {
         Empresa[] emp = this.getAll(empresaFilter);
     return emp.length == 1? emp[0]: null;
     }
+    
+    
     public Empresa[] getAll(EmpresaFilter empresaFilter) {
     String query = "SELECT id, nombre, direccion, telefono FROM empresas ";
     

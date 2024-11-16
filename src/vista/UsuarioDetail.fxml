@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="486.0" spacing="10.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.UsuarioDetailController">
+    <children>
+         <Label text="UserName" />
+        <HBox alignment="CENTER" spacing="10.0">
+           
+            <TextField fx:id="txtUserName" prefWidth="200.0" />
+        </HBox>
+                <Label text="Password" />
+        <HBox alignment="CENTER" spacing="10.0">
+    
+            <TextField fx:id="txtPassword" prefWidth="200.0" />
+        </HBox>
+          <Label text="Mail" />
+        <HBox alignment="CENTER" spacing="10.0">
+          
+            <TextField fx:id="txtMail" prefWidth="200.0" />
+        </HBox>
+         <Label text="ID Rol:" />
+      <HBox alignment="CENTER" spacing="10.0">
+         <children>
+            <TextField fx:id="txtIdRol" prefWidth="200.0" />
+         </children>
+      </HBox>
+      <Label text="ID:" />
+      <HBox alignment="CENTER" spacing="10.0">
+         <children>
+            <TextField fx:id="txtId" prefWidth="200.0" />
+         </children>
+      </HBox>
+        
+        <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#handleGuardar" text="Guardar" />
+    </children>
+</VBox>

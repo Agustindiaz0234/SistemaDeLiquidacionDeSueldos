@@ -19,8 +19,8 @@
             </Menu>
          <Menu mnemonicParsing="false" text="Administrar">
            <items>
-             <MenuItem mnemonicParsing="false" text="Usuarios" />
-               <MenuItem mnemonicParsing="false" text="Roles" />
+             <MenuItem onAction="#showUsuarioList" text="Usuarios" />
+               <MenuItem onAction="#showRolList" text="Roles" />
                <MenuItem mnemonicParsing="false" text="Permisos" />
            </items>
          </Menu>
