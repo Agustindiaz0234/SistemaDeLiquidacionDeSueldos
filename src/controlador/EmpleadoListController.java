@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -39,6 +40,13 @@ public class EmpleadoListController implements Initializable {
     private EmpleadoRepository empleadoRepository;
     
     private static Empresa empresa;
+    
+    @FXML
+    private TableColumn<Empleado, Void> columBoton;
+    
+     MainLayoutController mainController = Main.getMainController(); 
+    @FXML
+    private TableColumn<Empleado, Void> columBoton1;
 
  public EmpleadoListController() {
         // Inicializamos el repositorio en el constructor
@@ -51,6 +59,45 @@ public class EmpleadoListController implements Initializable {
         this.columDireccion.setCellValueFactory(new PropertyValueFactory("apellido"));
         this.columnTelefono.setCellValueFactory(new PropertyValueFactory("telefono"));
         this.columnMail.setCellValueFactory(new PropertyValueFactory("mail"));
+        
+     columBoton.setCellFactory(param -> new TableCell<Empleado, Void>() {
+   private final Button btn = new Button("Seleccionar");
+
+        @Override
+        protected void updateItem(Void item, boolean empty) {
+            super.updateItem(item, empty);
+            
+            if (empty) {
+                setGraphic(null);
+            } else {
+                final Empleado empleado = getTableView().getItems().get(getIndex());
+                
+                btn.setOnAction(event -> handleButton(empleado));
+                
+                setGraphic(btn);
+            }
+        }
+    });
+     
+        columBoton1.setCellFactory(param -> new TableCell<Empleado, Void>() {
+   private final Button btn = new Button("Seleccionar");
+
+        @Override
+        protected void updateItem(Void item, boolean empty) {
+            super.updateItem(item, empty);
+            
+            if (empty) {
+                setGraphic(null);
+            } else {
+                final Empleado empleado = getTableView().getItems().get(getIndex());
+                
+                btn.setOnAction(event -> handleButton1(empleado));
+                
+                setGraphic(btn);
+            }
+        }
+    });
+        
         cargarDatosDesdeBD();
     }  
     
@@ -86,7 +133,6 @@ public class EmpleadoListController implements Initializable {
 
     @FXML
     private void navegarAgregarEmpleado(ActionEvent event) {
-          MainLayoutController mainController = Main.getMainController(); 
           EmpleadoDetailController.setFalse();
           mainController.showEmpleadoDetail(empresa, null); 
     }
@@ -102,7 +148,7 @@ public class EmpleadoListController implements Initializable {
                alert.setContentText("No se seleccionó ningún empleado");
                alert.showAndWait();
          }else{
-           MainLayoutController mainController = Main.getMainController(); 
+          
            mainController.showEmpleadoDetail(empresa, selectedEmpleado); 
          }
          }
@@ -110,5 +156,17 @@ public class EmpleadoListController implements Initializable {
       public static void setEmpresa(Empresa emp) {   
       empresa = emp;
     }
+      
+      public void handleButton(Empleado emp){
+          LiquidacionController.recuperarEmpresaEmpleado(empresa, emp);
+          mainController.showLiquidacion();
+      
+      }
+      
+           public void handleButton1(Empleado emp){
+         ReciboListController.setEmpleado(emp);
+          mainController.showReciboList();
+      
+      }
     
 }

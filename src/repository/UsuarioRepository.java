@@ -82,6 +82,12 @@ public class UsuarioRepository {
             
             stmt.executeUpdate();
         
+        }catch (SQLException e) {
+        if (e.getSQLState().equals("23000")) { // Código de error SQL para clave duplicada en MySQL
+            System.out.println("Error: Ya existe un usuario con el ID " + usuario.getId());
+        } else {
+            e.printStackTrace(); // Para otros errores
+        }
         }catch(Exception e){
         
         e.printStackTrace();
