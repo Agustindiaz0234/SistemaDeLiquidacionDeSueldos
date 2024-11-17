@@ -44,9 +44,9 @@ public class EmpleadoDetailController implements Initializable {
     
     private EmpresaRepository empresaRepository;
 
-     private EmpleadoRepository empleadoRepository;
-    public EmpleadoDetailController() {
-        // Inicializamos el repositorio en el constructor
+    private EmpleadoRepository empleadoRepository;
+  
+     public EmpleadoDetailController() {
         this.empresaRepository = new EmpresaRepository();
         this.empleadoRepository = new EmpleadoRepository();
     }
@@ -77,10 +77,8 @@ public class EmpleadoDetailController implements Initializable {
         String apellido = txtApellido.getText();
         int telefono = Integer.parseInt(txtTelefono.getText());
         String mail = txtMail.getText();
-//        int id = Integer.parseInt(txtId.getText());
         
-        int empleadoId = empleado == null ? 0 : empleado.getId();
-        Empleado emp = new Empleado(empleadoId, nombre, apellido,telefono, mail, empresa.getId());
+        Empleado emp = new Empleado( nombre, apellido,telefono, mail, empresa.getId());
         
         if(isEdit){
         

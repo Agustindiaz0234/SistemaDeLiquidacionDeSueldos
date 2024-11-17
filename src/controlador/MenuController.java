@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import modelo.Usuario;
 
 public class MenuController implements Initializable {
 
@@ -26,14 +27,6 @@ public class MenuController implements Initializable {
         // TODO
     }    
 
-    private void click(ActionEvent event) {
-        
-        Stage stage = (Stage) btnEmpresa.getScene().getWindow();
-
-        
-        
-    }
-
     @FXML
     private void navegarEmpresa(ActionEvent event) {
         MainLayoutController mainController = Main.getMainController();
@@ -42,12 +35,14 @@ public class MenuController implements Initializable {
 
     @FXML
     private void navegarAdministrar(ActionEvent event) {
+        Usuario loggedUsuario = Session.getCurrentUser();
+        if(loggedUsuario.getIdRol() == 1){
+         MainLayoutController mainController = Main.getMainController();
+         mainController.showUsuarioList();
+        }else{
+        PopupAlert.noPermiso();
+        }
     }
 
-    @FXML
-    private void closeVentana(ActionEvent event) {
-        MainLayoutController mainController = Main.getMainController();
-        mainController.showAgregarEmpresa();        
-    }
     
 }

@@ -1,26 +1,63 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package controlador;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import modelo.Usuario;
+import repository.UsuarioRepository;
 
-/**
- * FXML Controller class
- *
- * @author diaza
- */
-public class LoginController implements Initializable {
+public class LoginController {
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    @FXML
+    private TextField txtUserName;
+    @FXML
+    private PasswordField txtPassword;
+
+    private UsuarioRepository usuarioRepository;
     
+   
+
+    public LoginController() {
+        this.usuarioRepository = new UsuarioRepository();
+    }
+
+    @FXML
+    private void handleLogin(ActionEvent event) {
+        String userName = txtUserName.getText();
+        String password = txtPassword.getText();
+        
+  
+        if (userName.isEmpty() || password.isEmpty()) {
+            showError("Please enter both username and password.");
+            return;
+        }
+
+        if (userName.isEmpty() || password.isEmpty()) {
+            showError("Please enter both username and password.");
+            return;
+        }
+
+                Usuario usuario = usuarioRepository.getByUserName(userName);
+        
+        if (usuario != null && usuario.getPassword().equals(password)) {
+   
+             Session.setCurrentUser(usuario);
+             MainLayoutController mainController = Main.getMainController();
+             mainController.showMenu();
+
+        } else {
+            showError("Invalid username or password.");
+        }
+    }
+
+    private void showError(String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Login Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }

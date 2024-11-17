@@ -19,6 +19,15 @@ public class Usuario {
         this.mail = mail;        
         this.idRol = idRol;        
     }
+    
+    public Usuario(String userName, String password, String mail, int idRol) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.mail = mail;        
+        this.idRol = idRol;        
+    }
+
 
     public int getId() {
         return id;

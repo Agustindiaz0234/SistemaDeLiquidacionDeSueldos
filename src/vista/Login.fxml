@@ -7,24 +7,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <VBox alignment="CENTER" prefHeight="400.0" prefWidth="300.0" spacing="10" styleClass="form" stylesheets="@../css/login.css">
-            <!-- Título del formulario -->
-            <Label styleClass="form-title" text="Sign in to your account" />
-            
-            <!-- Campo de correo electrónico -->
-            <VBox spacing="5" styleClass="input-container">
-                <TextField promptText="Enter email" />
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.LoginController">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="300.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="10" styleClass="form" stylesheets="@../css/login.css">
+               <children>
+                  <Label styleClass="form-title" text="Sign in to your account" />
+                  <VBox spacing="5" styleClass="input-container">
+                     <children>
+                        <TextField fx:id="txtUserName" promptText="UserName" />
+                     </children>
+                  </VBox>
+                  <VBox spacing="5" styleClass="input-container">
+                     <children>
+                        <PasswordField fx:id="txtPassword" promptText="Enter password" />
+                     </children>
+                  </VBox>
+                  <Button onAction="#handleLogin" styleClass="submit" text="Sign in" />
+               </children>
             </VBox>
-            
-            <!-- Campo de contraseña -->
-            <VBox spacing="5" styleClass="input-container">
-                <PasswordField promptText="Enter password" />
-            </VBox>
-            
-            <!-- Botón de envío -->
-            <Button styleClass="submit" text="Sign in" />
-        </VBox>
-    </children>
-</AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

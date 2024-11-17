@@ -29,31 +29,13 @@ public class RolRepository {
    
       StringBuilder where = new StringBuilder();
     
-      if (rolFilter != null) {
-    
-          boolean hasPreviousCondition = false; // Para controlar si ya hay condiciones previas
-
-//    if (rolFilter.getId() != null) {
-//        where.append("id = '").append(rolFilter.getId()).append("' ");
-//        hasPreviousCondition = true; // Cambiar el estado si se agrega una condición
-//    }
-
-  /*  if (rolFilter.getNombre() != null) {
-        if (hasPreviousCondition) {
-            where.append("AND "); // Agregar "AND" si ya hay condiciones previas
-        }
-        where.append("nombre = '").append(rolFilter.getNombre()).append("' ");
-    }*/
-    }
-    
     
       query = query + (where.length() >0 ? "WHERE " + where.toString() : "");
     
     
-      List<Rol> roles = new ArrayList<>();  // Usamos una lista temporal
-
+      List<Rol> roles = new ArrayList<>();  
     
-      try (Connection conn = connect();  // Reutilizamos el método connect
+      try (Connection conn = connect();
          
               PreparedStatement stmt = conn.prepareStatement(query);
          
@@ -76,7 +58,6 @@ public class RolRepository {
                 e.printStackTrace();
             }
 
-    // Convertir la lista a un array y retornarlo
     return roles.toArray(new Rol[0]);
 }
   
@@ -93,6 +74,12 @@ public class RolRepository {
             
             stmt.executeUpdate();
         
+        }catch (SQLException e) {
+        if (e.getSQLState().equals("23000")) { 
+            System.out.println("Error: Ya existe un usuario con el ID " + rol.getId());
+        } else {
+            e.printStackTrace();
+        }
         }catch(Exception e){
         
         e.printStackTrace();

@@ -11,8 +11,17 @@ public class Empleado {
     String mail;
     int empresaId;
 
-    public Empleado(int id, String nombre, String apellido, int telefono, String mail, int empresaId) {
+    
+        public Empleado(int id, String nombre, String apellido, int telefono, String mail, int empresaId) {
         this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.telefono = telefono;
+        this.mail = mail;
+        this.empresaId = empresaId;
+    }
+    
+    public Empleado(String nombre, String apellido, int telefono, String mail, int empresaId) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;

@@ -16,6 +16,7 @@ public class EmpresaRepository {
     
 
   public Connection connect() throws SQLException {
+      
     String url = StaticVariables.DATABASE_URL;
     String username = StaticVariables.USERNAME;
     String password = StaticVariables.PASSWORD;
@@ -36,26 +37,18 @@ public class EmpresaRepository {
     
     StringBuilder where = new StringBuilder();
     if (empresaFilter != null) {
-    boolean hasPreviousCondition = false; // Para controlar si ya hay condiciones previas
+    boolean hasPreviousCondition = false;
 
     if (empresaFilter.getId() != null) {
         where.append("id = '").append(empresaFilter.getId()).append("' ");
-        hasPreviousCondition = true; // Cambiar el estado si se agrega una condición
+        hasPreviousCondition = true;
     }
-
-  /*  if (empresaFilter.getNombre() != null) {
-        if (hasPreviousCondition) {
-            where.append("AND "); // Agregar "AND" si ya hay condiciones previas
-        }
-        where.append("nombre = '").append(empresaFilter.getNombre()).append("' ");
-    }*/
     }
     
     query = query + (where.length() >0 ? "WHERE " + where.toString() : "");
     
-    List<Empresa> empresas = new ArrayList<>();  // Usamos una lista temporal
-
-    try (Connection conn = connect();  // Reutilizamos el método connect
+    List<Empresa> empresas = new ArrayList<>();
+    try (Connection conn = connect();
          PreparedStatement stmt = conn.prepareStatement(query);
          ResultSet rs = stmt.executeQuery()) {
 
@@ -73,20 +66,18 @@ public class EmpresaRepository {
         e.printStackTrace();
     }
 
-    // Convertir la lista a un array y retornarlo
     return empresas.toArray(new Empresa[0]);
 }
 
 public void insert(Empresa empresa){
 
-        String query = "INSERT INTO empresas (id, nombre, direccion, telefono) VALUES (?,?,?,?)";
+        String query = "INSERT INTO empresas (nombre, direccion, telefono) VALUES (?,?,?)";
         try{Connection conn = connect();
             PreparedStatement stmt = conn.prepareStatement(query);
             
-            stmt.setInt(1, empresa.getId());
-            stmt.setString(2, empresa.getNombre());
-            stmt.setString(3, empresa.getDireccion());
-            stmt.setInt(4, empresa.getTelefono());
+            stmt.setString(1, empresa.getNombre());
+            stmt.setString(2, empresa.getDireccion());
+            stmt.setInt(3, empresa.getTelefono());
             
             stmt.executeUpdate();
         
@@ -113,26 +104,45 @@ public void insert(Empresa empresa){
         
         }catch(Exception e){
         
-        e.printStackTrace();
+                 e.printStackTrace();
         
         }
 }
     
-       public void delete(int empresaId){
+    public void delete(int empresaId){
 
-        String query = "DELETE FROM empresas WHERE id= ?";
-        try{Connection conn = connect();
-            PreparedStatement stmt = conn.prepareStatement(query);
-            
-           
-            stmt.setInt(1, empresaId);
-          
-            stmt.executeUpdate();
-        
-        }catch(Exception e){
-        
-        e.printStackTrace();
-        
+        String deleteRecibosQuery = "DELETE FROM recibos WHERE empleado_id IN (SELECT id FROM empleados WHERE empresaId = ?)";
+        String deleteEmpleadosQuery = "DELETE FROM empleados WHERE empresaId = ?";
+        String deleteEmpresaQuery = "DELETE FROM empresas WHERE id = ?";
+
+        try (Connection conn = connect()) {
+
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement deleteRecibosStmt = conn.prepareStatement(deleteRecibosQuery)) {
+                deleteRecibosStmt.setInt(1, empresaId);
+                deleteRecibosStmt.executeUpdate();
+            }
+
+            try (PreparedStatement deleteEmpleadosStmt = conn.prepareStatement(deleteEmpleadosQuery)) {
+                deleteEmpleadosStmt.setInt(1, empresaId);
+                deleteEmpleadosStmt.executeUpdate();
+            }
+
+            try (PreparedStatement deleteEmpresaStmt = conn.prepareStatement(deleteEmpresaQuery)) {
+                deleteEmpresaStmt.setInt(1, empresaId);
+                deleteEmpresaStmt.executeUpdate();
+            }
+
+            conn.commit();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            try (Connection conn = connect()) {
+                conn.rollback();
+            } catch (SQLException rollbackEx) {
+                rollbackEx.printStackTrace();
+            }
         }
-}
+    }
 }

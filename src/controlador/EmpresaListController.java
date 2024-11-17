@@ -1,6 +1,7 @@
 package controlador;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -33,6 +35,7 @@ public class EmpresaListController implements Initializable {
     @FXML
     private TableColumn<Empresa, Void> columBoton;
     
+    MainLayoutController mainController = Main.getMainController();
     
     private EmpresaRepository empresaRepository;
     @FXML
@@ -84,17 +87,14 @@ public class EmpresaListController implements Initializable {
 
 
     @FXML
-    private void navegarAgregarEmpresa(ActionEvent event) {
-          
-        MainLayoutController mainController = Main.getMainController();
+    private void navegarAgregarEmpresa(ActionEvent event) { 
         EmpresaDetailController.setFalse();
         mainController.showAgregarEmpresa();
     }
     
 
     private void handleButton(Empresa empresa){
-        MainLayoutController mainController = Main.getMainController(); // Método para obtener la instancia del controlador principal
-        mainController.showEmpleadoList(empresa); //
+        mainController.showEmpleadoList(empresa); 
     }
 
    
@@ -104,15 +104,10 @@ public class EmpresaListController implements Initializable {
          Empresa selectedEmpresa = tblEmpresas.getSelectionModel().getSelectedItem();
       
          if(selectedEmpresa == null){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-               alert.setTitle("Advertencia");
-               alert.setHeaderText(null);
-               alert.setContentText("No se seleccionó ningúna empresa");
-               alert.showAndWait();
+               PopupAlert.noEmpresa();
          }else{
                 EmpresaDetailController.setEditMode(selectedEmpresa);
-                MainLayoutController mainLayout = Main.getMainController();
-                mainLayout.showAgregarEmpresa();
+                mainController.showAgregarEmpresa();
          }
     }
 
@@ -122,15 +117,21 @@ public class EmpresaListController implements Initializable {
         Empresa selectedEmpresa = tblEmpresas.getSelectionModel().getSelectedItem();
         
           if(selectedEmpresa == null){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-               alert.setTitle("Advertencia");
-               alert.setHeaderText(null);
-               alert.setContentText("No se seleccionó ningúna empresa");
-               alert.showAndWait();
+           PopupAlert.noEmpresa();
           }else{
+        
+            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Confirmación de eliminación");
+            confirmationAlert.setHeaderText(null);
+            confirmationAlert.setContentText("¿Estás seguro de que deseas eliminar esta empresa?");
+
+            Optional<ButtonType> result = confirmationAlert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
                   EmpresaRepository er = new EmpresaRepository();
                   er.delete(selectedEmpresa.getId());
-                 cargarDatosDesdeBD();
+                  cargarDatosDesdeBD();
+          }
           }
     }
 

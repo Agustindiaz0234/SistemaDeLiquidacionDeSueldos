@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import modelo.Empleado;
 import modelo.Empresa;
+import modelo.Usuario;
 
 
 public class MainLayoutController implements Initializable {
@@ -22,21 +23,35 @@ public class MainLayoutController implements Initializable {
 
         @FXML
     public void logout(ActionEvent event) {
-        Stage stage = (Stage) btnSalir.getParentPopup().getOwnerWindow();
-        stage.close();
+        
+        Session.setCurrentUser(null);
+        loadForm("Login.fxml");
     }
     
     @FXML
     public void showMenu(){
+        Usuario loggedInUser = Session.getCurrentUser(); 
+        if(loggedInUser==null){
+        PopupAlert.noLogged();
+        return;
+        }
         loadForm("Menu.fxml");
     }
   
     @FXML
     public void showEmpresa() {
+        Usuario loggedInUser = Session.getCurrentUser(); 
+    
+        if(loggedInUser==null){
+        
+         PopupAlert.noLogged();
+        
+         return;
+        
+        }
         loadForm("EmpresaList.fxml");
     }
     
-    @FXML
     public void showAgregarEmpresa(){
         loadForm("EmpresaDetail.fxml");
     }
@@ -48,24 +63,63 @@ public class MainLayoutController implements Initializable {
      
      public void showEmpleadoDetail(Empresa empresa, Empleado empleado){
          if(empleado != null){
-          EmpleadoDetailController.setEditMode(empleado);
+         
+             EmpleadoDetailController.setEditMode(empleado);
+         
          }
-          EmpleadoDetailController.setEmpresa(empresa);
-        loadForm("EmpleadoDetail.fxml");
+          
+         EmpleadoDetailController.setEmpresa(empresa);
+        
+          loadForm("EmpleadoDetail.fxml");
      }
 
+    @FXML
      public void showUsuarioList(){
-     loadForm("UsuarioList.fxml");
+     Usuario loggedInUser = Session.getCurrentUser(); 
+    
+     if(loggedInUser==null){
+     
+         PopupAlert.noLogged();
+     
+         return;
+     }
+     
+     if(loggedInUser.getIdRol()==1){
+     
+         loadForm("UsuarioList.fxml");
+     }else{
+     
+         PopupAlert.noPermiso();
+        
+     }
      }
      
      public void showUsuarioDetail(){
      loadForm("UsuarioDetail.fxml");
      }
      
+    @FXML
      public void showRolList(){
-     loadForm("RolList.fxml");
+         Usuario loggedInUser = Session.getCurrentUser(); 
+     if(loggedInUser==null){
+     
+         PopupAlert.noLogged();
+     
+         return;
+     
+     }
+     
+     if(loggedInUser.getIdRol()==1){
+     
+         loadForm("RolList.fxml");
+     }else{
+     
+         PopupAlert.noPermiso();
+     
+     }
      }
      public void showRolDetail(){
+         
      loadForm("RolDetail.fxml");
      }
      
@@ -77,6 +131,11 @@ public class MainLayoutController implements Initializable {
      loadForm("ReciboList.fxml");
      }
      
+     public void showLogin(){
+         
+     loadForm("Login.fxml");
+     
+     }
      
     private void loadForm(String fxmlFile) {
         try {
@@ -91,9 +150,14 @@ public class MainLayoutController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        showMenu();
+        showLogin();
       }
 
+    @FXML
+    public void cerrarVentana() {
+         Stage stage = (Stage) btnSalir.getParentPopup().getOwnerWindow();
+        stage.close();
+    }
 
-    
+
 }

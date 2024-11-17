@@ -135,4 +135,25 @@ public class UsuarioRepository {
         
         }
 }
+       
+        public Usuario getByUserName(String userName) {
+        String query = "SELECT * FROM usuarios WHERE username = ?";
+        try (Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, userName);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                // Retorna el usuario si se encuentra
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String mail = rs.getString("mail");
+                int idRol = rs.getInt("idRol");
+                return new Usuario(id, username, password, mail, idRol);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -2,6 +2,7 @@
 package controlador;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -115,19 +117,24 @@ public class EmpleadoListController implements Initializable {
       
         
         Empleado selectedEmpleado = tblEmpleados.getSelectionModel().getSelectedItem();
+        System.out.println(selectedEmpleado.getId());
         
         if(selectedEmpleado == null){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-               alert.setTitle("Advertencia");
-               alert.setHeaderText(null);
-               alert.setContentText("No se seleccionó ningún empleado");
-               alert.showAndWait();
+        PopupAlert.noSeleccion("empleado");
          }else{
         
-        EmpleadoRepository er = new EmpleadoRepository();
-        
-        er.delete(selectedEmpleado.getId());
-        cargarDatosDesdeBD();
+            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Confirmación de eliminación");
+            confirmationAlert.setHeaderText(null);
+            confirmationAlert.setContentText("¿Estás seguro de que deseas eliminar este empleado?");
+
+            Optional<ButtonType> result = confirmationAlert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            EmpleadoRepository er = new EmpleadoRepository();
+            er.delete(selectedEmpleado.getId());
+            cargarDatosDesdeBD();
+           }
         }
     }
 
@@ -142,11 +149,7 @@ public class EmpleadoListController implements Initializable {
             Empleado selectedEmpleado = tblEmpleados.getSelectionModel().getSelectedItem();
             
          if(selectedEmpleado == null){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-               alert.setTitle("Advertencia");
-               alert.setHeaderText(null);
-               alert.setContentText("No se seleccionó ningún empleado");
-               alert.showAndWait();
+             PopupAlert.noSeleccion("empleado");
          }else{
           
            mainController.showEmpleadoDetail(empresa, selectedEmpleado); 

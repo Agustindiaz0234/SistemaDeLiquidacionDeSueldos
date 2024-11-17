@@ -8,7 +8,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import modelo.Rol;
 import modelo.Usuario;
+import repository.RolRepository;
 import repository.UsuarioRepository;
 
 
@@ -23,21 +25,22 @@ public class UsuarioDetailController implements Initializable {
     @FXML
     private Button btnGuardar;
     
+    @FXML
     private ChoiceBox<String> cBoxRol;
-    @FXML
-    private TextField txtIdRol;
-    @FXML
+    
     private TextField txtId;
     
     private static Usuario usuario;
     
     private static boolean isEdit;
     
+    private RolRepository rolRepository;
       
     private UsuarioRepository usuarioRepository;
 
     public UsuarioDetailController() {
         this.usuarioRepository = new UsuarioRepository();
+        this.rolRepository = new RolRepository();
     }
 
     @Override
@@ -49,11 +52,9 @@ public class UsuarioDetailController implements Initializable {
             this.txtPassword.setText(usuario.getPassword());
             this.txtMail.setText(usuario.getMail());
             this.txtId.setText(String.valueOf(usuario.getId()));
-            this.txtIdRol.setText(String.valueOf(usuario.getIdRol()));
-//          cBoxRol.getItems().addAll("Opción 1", "Opción 2", "Opción 3");
-//          cBoxRol.setValue("Opción 1"); // Opción seleccionada por defecto
+           
         }
-        
+         cargarRoles(cBoxRol);
     }    
     @FXML
     private void handleGuardar(ActionEvent event) {
@@ -61,11 +62,12 @@ public class UsuarioDetailController implements Initializable {
            String userName = txtUserName.getText();
            String password = txtPassword.getText();
            String mail = txtMail.getText();
-           int id = Integer.parseInt(txtId.getText());
-           int idRol = Integer.parseInt(txtIdRol.getText());
+           String rolSeleccionado = cBoxRol.getValue();
+           int idRol = obtenerIdRol(rolSeleccionado);
+
           
 
-           Usuario usuario = new Usuario(id, userName, password, mail, idRol);
+           Usuario usuario = new Usuario( userName, password, mail, idRol);
        
            if(isEdit){
         
@@ -80,6 +82,39 @@ public class UsuarioDetailController implements Initializable {
                mainController.showUsuarioList();
     }
     
+    
+    public void cargarRoles(ChoiceBox<String> choiceBoxRoles){
+            
+        Rol[] roles = rolRepository.getAll(null);
+        
+         
+            if (roles == null || roles.length == 0) {
+               System.out.println("No se encontraron roles");
+               return;
+           }
+
+            choiceBoxRoles.getItems().clear();
+    
+  
+            for (Rol rol : roles) {
+                choiceBoxRoles.getItems().add(rol.getNombre()); 
+            }
+    }
+    
+        public int obtenerIdRol(String nombreRol) {
+
+            Rol[] roles = rolRepository.getAll(null);
+
+
+            for (Rol rol : roles) {
+                if (rol.getNombre().equals(nombreRol)) {
+                    return rol.getId();
+                }
+            }
+            return -1; 
+
+        }
+
     
       public void insertarUsuario(Usuario usuario){
         

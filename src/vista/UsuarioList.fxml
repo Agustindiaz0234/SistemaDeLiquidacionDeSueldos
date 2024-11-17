@@ -7,14 +7,15 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.UsuarioListController">
    <children>
+      <TableView fx:id="tblUsuarios" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="108.0" text="Id" />
+            <TableColumn fx:id="colUserName" prefWidth="222.0" text="UserName" />
+          <TableColumn fx:id="colMail" minWidth="0.0" prefWidth="269.0" text="Mail" />
+        </columns>
+      </TableView>
       <Button mnemonicParsing="false" onAction="#navegarAgregarUsuario" text="Agregar" />
       <Button mnemonicParsing="false" onAction="#navegarEditarUsuario" text="Editar" />
       <Button mnemonicParsing="false" onAction="#navegarEliminarUsuario" text="Eliminar" />
-      <TableView fx:id="tblUsuarios" prefHeight="200.0" prefWidth="200.0">
-        <columns>
-          <TableColumn fx:id="colUserName" prefWidth="75.0" text="UserName" />
-          <TableColumn fx:id="colMail" prefWidth="75.0" text="Mail" />
-        </columns>
-      </TableView>
    </children>
 </VBox>

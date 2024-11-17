@@ -54,9 +54,8 @@ public class EmpresaDetailController implements Initializable {
         String nombre = txtNombre.getText();
         String direccion = txtDireccion.getText();
         int telefono = Integer.parseInt(txtTelefono.getText());
-        int id = Integer.parseInt(txtId.getText());
         
-        Empresa empresa = new Empresa(id, nombre, direccion,telefono);
+        Empresa empresa = new Empresa(nombre, direccion, telefono);
         
         if(isEdit){
         
@@ -67,8 +66,8 @@ public class EmpresaDetailController implements Initializable {
             insertarEmpresa(empresa);
         
         }
-            MainLayoutController mainLayout = Main.getMainController();
-            mainLayout.showEmpresa();
+            MainLayoutController mainController = Main.getMainController();
+            mainController.showEmpresa();
     }
     
     

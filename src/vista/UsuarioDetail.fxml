@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
@@ -24,17 +25,11 @@
             <TextField fx:id="txtMail" prefWidth="200.0" />
         </HBox>
          <Label text="ID Rol:" />
+      <HBox alignment="CENTER" spacing="10.0" />
       <HBox alignment="CENTER" spacing="10.0">
          <children>
-            <TextField fx:id="txtIdRol" prefWidth="200.0" />
-         </children>
-      </HBox>
-      <Label text="ID:" />
-      <HBox alignment="CENTER" spacing="10.0">
-         <children>
-            <TextField fx:id="txtId" prefWidth="200.0" />
-         </children>
-      </HBox>
+            <ChoiceBox fx:id="cBoxRol" prefWidth="150.0" />
+         </children></HBox>
         
         <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#handleGuardar" text="Guardar" />
     </children>
