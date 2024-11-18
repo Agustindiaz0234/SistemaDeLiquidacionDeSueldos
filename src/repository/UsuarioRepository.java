@@ -23,28 +23,10 @@ public class UsuarioRepository {
        public Usuario[] getAll(UsuarioFilter usuarioFilter) {
     String query = "SELECT id, userName, password, mail, idRol FROM usuarios ";
     
-    StringBuilder where = new StringBuilder();
-    if (usuarioFilter != null) {
-    boolean hasPreviousCondition = false; // Para controlar si ya hay condiciones previas
-
-//    if (usuarioFilter.getId() != null) {
-//        where.append("id = '").append(usuarioFilter.getId()).append("' ");
-//        hasPreviousCondition = true; // Cambiar el estado si se agrega una condición
-//    }
-
-  /*  if (usuarioFilter.getNombre() != null) {
-        if (hasPreviousCondition) {
-            where.append("AND "); // Agregar "AND" si ya hay condiciones previas
-        }
-        where.append("nombre = '").append(usuarioFilter.getNombre()).append("' ");
-    }*/
-    }
     
-    query = query + (where.length() >0 ? "WHERE " + where.toString() : "");
-    
-    List<Usuario> usuarios = new ArrayList<>();  // Usamos una lista temporal
+    List<Usuario> usuarios = new ArrayList<>(); 
 
-    try (Connection conn = connect();  // Reutilizamos el método connect
+    try (Connection conn = connect(); 
          PreparedStatement stmt = conn.prepareStatement(query);
          ResultSet rs = stmt.executeQuery()) {
 
@@ -63,7 +45,6 @@ public class UsuarioRepository {
         e.printStackTrace();
     }
 
-    // Convertir la lista a un array y retornarlo
     return usuarios.toArray(new Usuario[0]);
 }
 
@@ -143,7 +124,6 @@ public class UsuarioRepository {
             stmt.setString(1, userName);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                // Retorna el usuario si se encuentra
                 int id = rs.getInt("id");
                 String username = rs.getString("username");
                 String password = rs.getString("password");

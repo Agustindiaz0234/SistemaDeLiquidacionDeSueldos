@@ -34,12 +34,6 @@ public class EmpleadoRepository {
         hasPreviousCondition = true; 
     }
 
-    if (empleadoFilter.getNombre() != null) {
-        if (hasPreviousCondition) {
-            where.append("AND "); 
-        }
-        where.append("nombre = '").append(empleadoFilter.getNombre()).append("' ");
-    }
     }
     
     query = query + (where.length() >0 ? "WHERE " + where.toString() : "");
@@ -136,7 +130,6 @@ public void insert(Empleado empleado){
 
             conn.commit();
 
-            System.out.println("Empleado y sus recibos asociados eliminados correctamente.");
         } catch (SQLException e) {
             e.printStackTrace();
             try (Connection conn = connect()) {

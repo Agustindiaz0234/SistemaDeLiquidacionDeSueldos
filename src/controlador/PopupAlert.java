@@ -36,5 +36,21 @@ public class PopupAlert {
                alert.setContentText("Debe iniciar sesion para acceder a esta funcion");
                alert.showAndWait(); 
      }
+     
+      public static void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Login Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+      
+      public static void guardado(String message){
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Login Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+      }
     
 }

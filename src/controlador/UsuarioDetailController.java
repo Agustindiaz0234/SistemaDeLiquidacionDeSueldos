@@ -51,7 +51,6 @@ public class UsuarioDetailController implements Initializable {
             this.txtUserName.setText(usuario.getUserName());
             this.txtPassword.setText(usuario.getPassword());
             this.txtMail.setText(usuario.getMail());
-            this.txtId.setText(String.valueOf(usuario.getId()));
            
         }
          cargarRoles(cBoxRol);
@@ -67,15 +66,17 @@ public class UsuarioDetailController implements Initializable {
 
           
 
-           Usuario usuario = new Usuario( userName, password, mail, idRol);
+          
        
            if(isEdit){
         
-            updateUsuario(usuario);
+           Usuario usuario1 = new Usuario(usuario.getId(), userName, password, mail, idRol);
+            updateUsuario(usuario1);
         
         }else{
             
-            insertarUsuario(usuario);
+           Usuario usuario1 = new Usuario( userName, password, mail, idRol);
+            insertarUsuario(usuario1);
         
         }
                MainLayoutController mainController = Main.getMainController();

@@ -43,7 +43,7 @@ public class RolDetailController implements Initializable {
             
             this.txtNombre.setText(rol.getNombre());
             this.txtId.setText(String.valueOf(rol.getId()));
-        
+            
           }    
 
       

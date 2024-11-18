@@ -3,18 +3,23 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.RolListController">
    <children>
-      <TableView fx:id="tblRoles" prefHeight="200.0" prefWidth="200.0">
-        <columns>
-          <TableColumn fx:id="colIdRol" prefWidth="300.0" text="Id Rol" />
-          <TableColumn fx:id="colNombreRol" prefWidth="299.0" text="Nombre" />
-        </columns>
-      </TableView>
-      <Button mnemonicParsing="false" onAction="#navegarAgregarRol" text="Agregar" />
-      <Button mnemonicParsing="false" onAction="#navegarEditarRol" text="Editar" />
-      <Button mnemonicParsing="false" onAction="#navegarEliminarRol" text="Eliminar" />
+      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <TableView fx:id="tblRoles" prefHeight="200.0" prefWidth="600.0">
+              <columns>
+                <TableColumn fx:id="colIdRol" prefWidth="300.0" text="Id Rol" />
+                <TableColumn fx:id="colNombreRol" prefWidth="299.0" text="Nombre" />
+              </columns>
+            </TableView>
+            <Button layoutX="451.0" layoutY="211.0" mnemonicParsing="false" onAction="#navegarEditarRol" text="Editar" />
+            <Button layoutX="365.0" layoutY="211.0" mnemonicParsing="false" onAction="#navegarEliminarRol" text="Eliminar" />
+            <Button layoutX="527.0" layoutY="211.0" mnemonicParsing="false" onAction="#navegarAgregarRol" text="Agregar" />
+         </children>
+      </AnchorPane>
    </children>
 </VBox>

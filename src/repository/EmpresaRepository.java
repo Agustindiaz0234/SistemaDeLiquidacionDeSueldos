@@ -90,7 +90,7 @@ public void insert(Empresa empresa){
  
     public void update(Empresa empresa){
 
-        String query = "UPDATE empresas set nombre = ?, direccion = ?, telefono = ? WHERE id= ?";
+        String query = "UPDATE empresas SET nombre = ?, direccion = ?, telefono = ? WHERE id= ?";
         try{Connection conn = connect();
             PreparedStatement stmt = conn.prepareStatement(query);
             

@@ -67,6 +67,12 @@ public class LiquidacionController implements Initializable {
         empresa = emp;
         empleado= empl;    
     }
+
+    @FXML
+    private void volver(ActionEvent event) {
+        MainLayoutController mainController = Main.getMainController();
+        mainController.showEmpleadoList(empresa);
+    }
     
     
 }

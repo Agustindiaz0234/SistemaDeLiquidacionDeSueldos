@@ -89,7 +89,7 @@ public class RolRepository {
     
         public void update(Rol rol){
 
-        String query = "UPDATE roles set id = ?, nombre = ? WHERE id= ?";
+        String query = "UPDATE roles set nombre = ? WHERE id= ?";
         try{Connection conn = connect();
             PreparedStatement stmt = conn.prepareStatement(query);
             

@@ -66,7 +66,6 @@ public class EmpleadoDetailController implements Initializable {
              this.txtApellido.setText(empleado.getApellido());
              this.txtTelefono.setText(String.valueOf(empleado.getTelefono()));
              this.txtMail.setText(empleado.getMail());
-             this.txtId.setText(String.valueOf(empleado.getId()));
 
         }
     }    
@@ -74,18 +73,18 @@ public class EmpleadoDetailController implements Initializable {
     @FXML
     private void handleGuardar(ActionEvent event) {
          String nombre = txtNombre.getText();
-        String apellido = txtApellido.getText();
-        int telefono = Integer.parseInt(txtTelefono.getText());
-        String mail = txtMail.getText();
+         String apellido = txtApellido.getText();
+         int telefono = Integer.parseInt(txtTelefono.getText());
+         String mail = txtMail.getText();
         
-        Empleado emp = new Empleado( nombre, apellido,telefono, mail, empresa.getId());
+      
         
         if(isEdit){
-        
+          Empleado emp = new Empleado(empleado.getId(), nombre, apellido,telefono, mail, empresa.getId());
             updateEmpleado(emp);
         
         }else{
-            
+              Empleado emp = new Empleado( nombre, apellido,telefono, mail, empresa.getId());
             insertarEmpleado(emp);
         
         }  

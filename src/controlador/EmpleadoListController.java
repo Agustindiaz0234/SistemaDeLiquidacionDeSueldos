@@ -114,8 +114,7 @@ public class EmpleadoListController implements Initializable {
 
     @FXML
     private void navegarEliminarEmpleado(ActionEvent event) {
-      
-        
+
         Empleado selectedEmpleado = tblEmpleados.getSelectionModel().getSelectedItem();
         System.out.println(selectedEmpleado.getId());
         

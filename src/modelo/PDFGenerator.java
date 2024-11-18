@@ -14,7 +14,6 @@ public class PDFGenerator {
         try {
            
 
-            // Crear el documento PDF
             Document document = new Document();
              ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             PdfWriter.getInstance(document, byteArrayOutputStream);
@@ -78,7 +77,6 @@ public class PDFGenerator {
 
             document.add(tablaDescuentos);
 
-            // Cerrar el documento
             document.close();
          guardarEnDB(byteArrayOutputStream.toByteArray(), nombreArchivo, idEmpleado);
 

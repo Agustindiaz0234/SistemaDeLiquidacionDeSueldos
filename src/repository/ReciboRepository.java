@@ -1,6 +1,7 @@
 
 package repository;
 
+import controlador.PopupAlert;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -52,7 +53,7 @@ public class ReciboRepository {
       
         String query = "INSERT INTO recibos (empleado_id, pdf, nombre) VALUES (?,?,?)";
         
-        try (Connection conn = connect(); // Conectar a la base de datos
+        try (Connection conn = connect(); 
              PreparedStatement pstmt = conn.prepareStatement(query)) {
              
             pstmt.setInt(1,empleadoId);
@@ -60,7 +61,7 @@ public class ReciboRepository {
             pstmt.setString(3, nombre);
             
             pstmt.executeUpdate();
-            System.out.println("PDF guardado en la base de datos con éxito.");
+            PopupAlert.guardado("Recibo guardado en exito");
         } catch (SQLException e) {
             e.printStackTrace();
         }

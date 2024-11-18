@@ -31,12 +31,12 @@ public class LoginController {
         
   
         if (userName.isEmpty() || password.isEmpty()) {
-            showError("Please enter both username and password.");
+            PopupAlert.showError("Please enter both username and password.");
             return;
         }
 
         if (userName.isEmpty() || password.isEmpty()) {
-            showError("Please enter both username and password.");
+           PopupAlert.showError("Please enter both username and password.");
             return;
         }
 
@@ -49,15 +49,9 @@ public class LoginController {
              mainController.showMenu();
 
         } else {
-            showError("Invalid username or password.");
+            PopupAlert.showError("Invalid username or password.");
         }
     }
 
-    private void showError(String message) {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Login Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+
 }

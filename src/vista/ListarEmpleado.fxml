@@ -8,6 +8,11 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ListarEmpleadoController">
    <children>
+      <Label fx:id="lblNombreEmpresa" layoutX="112.0" layoutY="-2.0" prefHeight="103.0" prefWidth="489.0" text="Empresa">
+         <font>
+            <Font size="41.0" />
+         </font>
+      </Label>
       <TableView fx:id="tblEmpleados" layoutX="112.0" layoutY="101.0" prefHeight="301.0" prefWidth="489.0">
         <columns>
           <TableColumn fx:id="colNombre" prefWidth="91.0" text="Nombre" />
@@ -16,10 +21,5 @@
             <TableColumn fx:id="colMail" prefWidth="148.0" text="E-mail" />
         </columns>
       </TableView>
-      <Label fx:id="lblNombreEmpresa" layoutX="112.0" layoutY="-2.0" prefHeight="103.0" prefWidth="489.0" text="Empresa">
-         <font>
-            <Font size="41.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

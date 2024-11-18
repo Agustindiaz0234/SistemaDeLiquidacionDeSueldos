@@ -8,18 +8,22 @@
 
 <VBox id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.EmpleadoListController">
    <children>
-      <Button fx:id="btnEliminar" layoutX="291.0" layoutY="350.0" mnemonicParsing="false" onAction="#navegarEliminarEmpleado" prefHeight="40.0" prefWidth="94.0" text="Eliminar" />
-      <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#navegarAgregarEmpleado" prefHeight="40.0" prefWidth="94.0" text="Agregar" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-      <Button fx:id="btnEditar" layoutX="391.0" layoutY="350.0" mnemonicParsing="false" onAction="#navegarEditarEmpleado" prefHeight="40.0" prefWidth="94.0" text="Editar" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="115.0" />
-      <TableView fx:id="tblEmpleados" layoutY="-1.0" prefHeight="347.0" prefWidth="603.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <columns>
-          <TableColumn fx:id="columNombre" prefWidth="143.0" text="Nombre" />
-          <TableColumn fx:id="columDireccion" prefWidth="152.0" text="Direccion" />
-            <TableColumn fx:id="columnTelefono" prefWidth="170.0" text="Telefono" />
-            <TableColumn fx:id="columnMail" prefWidth="133.0" text="Mail" />
-            <TableColumn fx:id="columBoton" prefWidth="75.0" text="Liquidar Sueldo" />
-            <TableColumn fx:id="columBoton1" prefWidth="75.0" text="Ver recibos" />
-        </columns>
-      </TableView>
+      <AnchorPane prefHeight="404.0" prefWidth="600.0">
+         <children>
+            <TableView fx:id="tblEmpleados" prefHeight="347.0" prefWidth="603.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columns>
+                <TableColumn fx:id="columNombre" prefWidth="143.0" text="Nombre" />
+                <TableColumn fx:id="columDireccion" prefWidth="152.0" text="Direccion" />
+                  <TableColumn fx:id="columnTelefono" prefWidth="170.0" text="Telefono" />
+                  <TableColumn fx:id="columnMail" prefWidth="133.0" text="Mail" />
+                  <TableColumn fx:id="columBoton" prefWidth="75.0" text="Liquidar Sueldo" />
+                  <TableColumn fx:id="columBoton1" prefWidth="75.0" text="Ver recibos" />
+              </columns>
+            </TableView>
+            <Button fx:id="btnEliminar" layoutX="279.0" layoutY="350.0" mnemonicParsing="false" onAction="#navegarEliminarEmpleado" prefHeight="40.0" prefWidth="94.0"  AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="225.0" text="Eliminar" />
+            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#navegarAgregarEmpleado" prefHeight="40.0" prefWidth="94.0" text="Agregar" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#navegarEditarEmpleado" prefHeight="40.0" prefWidth="94.0" text="Editar" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="115.0" />
+         </children>
+      </AnchorPane>
    </children>
 </VBox>

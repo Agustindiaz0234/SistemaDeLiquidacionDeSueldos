@@ -44,8 +44,7 @@ public class EmpresaDetailController implements Initializable {
             this.txtNombre.setText(empresa.getNombre());
              this.txtDireccion.setText(empresa.getDireccion());
              this.txtTelefono.setText(String.valueOf(empresa.getTelefono()));
-             this.txtId.setText(String.valueOf(empresa.getId()));
-
+            
         }
     }    
 
@@ -55,15 +54,14 @@ public class EmpresaDetailController implements Initializable {
         String direccion = txtDireccion.getText();
         int telefono = Integer.parseInt(txtTelefono.getText());
         
-        Empresa empresa = new Empresa(nombre, direccion, telefono);
-        
+       
         if(isEdit){
-        
-            updateEmpresa(empresa);
+        Empresa empresa1 = new Empresa(empresa.getId(),nombre, direccion, telefono);
+            updateEmpresa(empresa1);
         
         }else{
-            
-            insertarEmpresa(empresa);
+          Empresa empresa1 = new Empresa(nombre, direccion, telefono);  
+            insertarEmpresa(empresa1);
         
         }
             MainLayoutController mainController = Main.getMainController();
@@ -72,7 +70,7 @@ public class EmpresaDetailController implements Initializable {
     
     
     public void insertarEmpresa(Empresa empresa){
-        
+        System.out.println("Aqui funciona");
         this.empresaRepository.insert(empresa);
        
     }
